@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = Object.values(import.meta.glob('./*.md', { eager: true })) as Array<{ frontmatter: { title: string; description: string; pubDate: string | Date; category: string; tags?: string[] }; url: string }>;
+const published = posts.sort((a, b) => +new Date(b.frontmatter.pubDate) - +new Date(a.frontmatter.pubDate));
+---
+<BaseLayout title="知识博客" description="技术实践、项目复盘和持续学习的文章。" active="blog">
+  <section class="page-head wrap"><span class="eyebrow">NOTES & IDEAS</span><h1>知识博客<span class="dot">.</span></h1><p>把零散的记录整理成能被检索、分享和复用的文章。</p></section>
+  <section class="blog-list wrap"><div class="list-heading"><span>全部文章</span><span>{published.length.toString().padStart(2, '0')} 篇</span></div>{published.map((post) => <a class="post" href={post.url}><div class="post-meta"><span>{post.frontmatter.category}</span><time datetime={new Date(post.frontmatter.pubDate).toISOString().slice(0, 10)}>{new Date(post.frontmatter.pubDate).toISOString().slice(0, 10)}</time></div><div><h2>{post.frontmatter.title}</h2><p>{post.frontmatter.description}</p><div class="tags">{post.frontmatter.tags?.map((tag) => <span>#{tag}</span>)}</div></div><span class="arrow" aria-hidden="true">↗</span></a>)}</section>
+</BaseLayout>
+<style>
+  .page-head{padding-top:95px;padding-bottom:89px}.page-head h1{font-size:clamp(52px,7vw,88px);letter-spacing:-.08em;color:#153d35;margin:20px 0}.dot{color:#91b862}.page-head p{color:#697b70;line-height:1.8}.blog-list{padding-bottom:110px}.list-heading{display:flex;justify-content:space-between;border-bottom:1px solid #cfdecf;padding-bottom:17px;font-size:12px;font-weight:800;color:#4d7459}.post{display:grid;grid-template-columns:200px 1fr 30px;gap:25px;padding:38px 0;border-bottom:1px solid #dce6dc;transition:transform .2s}.post:hover{transform:translateX(5px)}.post-meta{display:flex;flex-direction:column;gap:15px;color:#5b8b63;font-size:12px;font-weight:750}.post-meta time{color:#8a9a8d}.post h2{font-size:25px;letter-spacing:-.04em;color:#1a4237;margin:0 0 10px}.post p{font-size:13px;color:#718176;line-height:1.8;margin:0}.tags{display:flex;gap:10px;margin-top:17px;color:#649273;font-size:11px}.arrow{font-size:22px;color:#4b805a}@media(max-width:760px){.page-head{padding-top:62px;padding-bottom:54px}.blog-list{padding-bottom:75px}.post{grid-template-columns:1fr 24px;gap:14px}.post-meta{grid-column:1 / 3;flex-direction:row;gap:15px}.post h2{font-size:22px}}
+</style>

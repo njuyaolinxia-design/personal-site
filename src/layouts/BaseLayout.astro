@@ -1,0 +1,59 @@
+---
+import { profile } from '../data/profile';
+
+interface Props {
+  title: string;
+  description: string;
+  active?: 'home' | 'work' | 'blog' | 'card';
+}
+
+const { title, description, active } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} · {profile.name}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header wrap">
+        <a class="brand" href="/" aria-label="返回首页"><span class="brand-mark">{profile.initials}</span><span>{profile.name}<small>Portfolio & Notes</small></span></a>
+        <nav aria-label="主导航">
+          <a href="/" aria-current={active === 'home' ? 'page' : undefined}>首页</a>
+          <a href="/work/" aria-current={active === 'work' ? 'page' : undefined}>经历与项目</a>
+          <a href="/blog/" aria-current={active === 'blog' ? 'page' : undefined}>知识博客</a>
+          <a href="/card/" aria-current={active === 'card' ? 'page' : undefined}>联系名片</a>
+        </nav>
+      </header>
+      <main><slot /></main>
+      <footer class="site-footer wrap">
+        <div><strong>{profile.name}</strong><p>持续记录实践、思考与成长。</p></div>
+        <div class="footer-links"><a href="/blog/">文章</a><a href="/work/">项目</a><a href="/card/">联系</a></div>
+        <div class="filings">
+          {profile.icpNumber && <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{profile.icpNumber}</a>}
+          {profile.policeRecordNumber && profile.policeRecordUrl && <a href={profile.policeRecordUrl} target="_blank" rel="noopener noreferrer">{profile.policeRecordNumber}</a>}
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  :root{font-family:Inter,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;color:#182b2c;background:#f6f7f2;font-synthesis:none}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:inherit;text-decoration:none}button,input{font:inherit}
+  ::selection{background:#c8ec69;color:#182b2c}.site-shell{min-height:100vh;display:flex;flex-direction:column}.wrap{width:min(1180px,calc(100% - 64px));margin-inline:auto}main{flex:1}
+  .site-header{height:94px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #dce4dc}.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:-.02em}.brand-mark{display:grid;place-items:center;width:41px;height:41px;border-radius:12px;background:#153b36;color:#d6f287;font-size:13px;letter-spacing:0}.brand small{display:block;color:#74817c;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;margin-top:2px}.site-header nav{display:flex;gap:30px;align-items:center}.site-header nav a{font-size:13px;font-weight:650;color:#5f6e68;transition:color .2s}.site-header nav a:hover,.site-header nav a[aria-current=page]{color:#174a41}
+  .site-footer{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:28px;padding:40px 0 55px;border-top:1px solid #dce4dc;color:#60726c;font-size:13px}.site-footer strong{color:#183b36}.site-footer p{margin:8px 0}.footer-links{display:flex;gap:18px}.filings{display:flex;flex-basis:100%;align-items:center;flex-direction:column;gap:7px;text-align:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:#4d7565;font-size:12px;font-weight:750;letter-spacing:.15em;text-transform:uppercase}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#86b54f}.section-heading{font-size:clamp(32px,4vw,54px);line-height:1.15;letter-spacing:-.055em;margin:16px 0 18px;color:#143b36}.muted{color:#697b73;line-height:1.8}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border-radius:8px;font-size:13px;font-weight:750;transition:transform .2s,background .2s}.btn:hover{transform:translateY(-2px)}.btn-dark{background:#153d36;color:#fff}.btn-dark:hover{background:#245c50}.btn-outline{border:1px solid #b9cdc0;color:#1d483c}.btn-outline:hover{background:#e8eee5}
+  @media(max-width:760px){.wrap{width:min(100% - 36px,1180px)}.site-header{height:auto;padding-top:19px;padding-bottom:15px;align-items:flex-start;flex-direction:column}.site-header nav{width:100%;gap:0;justify-content:space-between}.site-header nav a{font-size:12px}.site-footer{flex-direction:column;padding:35px 0}.footer-links{flex-wrap:wrap}}
+</style>
