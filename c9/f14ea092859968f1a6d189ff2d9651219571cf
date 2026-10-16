@@ -1,0 +1,48 @@
+src/pages/blog/opencode-code-tour.md
+  s_f35b7491fba4ae::t_f1f9fb0e236d54 3,5-6,95,97-100,103-107
+  s_f35b7491fba4ae::t_367b6e77e4982b 1-2,4,7-29,31-50,52-94,96,101-102
+  s_f35b7491fba4ae::t_6f07e4b24859e3 30,51
+src/pages/blog/qwenpaw-code-tour.md
+  s_f35b7491fba4ae::t_367b6e77e4982b 1-2,4,7-90,92,97-98
+  s_f35b7491fba4ae::t_f1f9fb0e236d54 3,5-6,91,93-96,99-101,103
+  s_f35b7491fba4ae::t_997f5c5a5467a5 102,104-105
+src/pages/blog/deepseek-harness-code-tour.md
+  s_f35b7491fba4ae::t_f1f9fb0e236d54 3,5-6,103,105-108,111-117
+  s_f35b7491fba4ae::t_6f07e4b24859e3 52,54
+  s_f35b7491fba4ae::t_367b6e77e4982b 1-2,4,7-51,53,55-102,104,109-110
+src/pages/blog/build-agent-harness.md
+  s_f35b7491fba4ae::t_53613ee0b01fbf 1-98
+src/pages/blog/agent-session-checkpoint-recovery.md
+  s_f35b7491fba4ae::t_53613ee0b01fbf 1-82
+src/pages/blog/codex-cli-code-tour.md
+  s_f35b7491fba4ae::t_f1f9fb0e236d54 1-99
+src/pages/blog/agent-harness-landscape.md
+  s_f35b7491fba4ae::t_d234deb03fd905 1-85
+src/pages/blog/context-engineering-for-agents.md
+  h_7152bc100c7b08 1-89
+src/pages/blog/four-agent-loops-comparison.md
+  h_7152bc100c7b08 1-87
+src/pages/blog/tools-permissions-sandbox-comparison.md
+  h_7152bc100c7b08 1-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5+huawei.2",
+  "base_commit_sha": "c9f14ea092859968f1a6d189ff2d9651219571cf",
+  "prompts": {},
+  "humans": {
+    "h_7152bc100c7b08": {
+      "author": "njuyaolinxia-design <246489626+njuyaolinxia-design@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_f35b7491fba4ae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13e8c-ebf3-75e3-b8ae-4fa7f4d04a3e",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "njuyaolinxia-design <246489626+njuyaolinxia-design@users.noreply.github.com>"
+    }
+  }
+}
